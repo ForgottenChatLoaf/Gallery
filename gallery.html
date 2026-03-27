@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Gallery | Ethan Gacud</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            font-family: 'Playfair Display', 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        header {
+            background: linear-gradient(135deg, #c5a059 0%, #8e6e2e 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #800000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        header h1 {
+            color: #0d0d0d;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0 0 20px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 0;
+        }
+
+        nav a {
+            color: #0d0d0d;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        nav a:hover {
+            background-color: #800000;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #0d0d0d;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        section {
+            width: 100%;
+            padding: 40px 20px;
+            border: 2px solid #800000; 
+            background-color: #141414;
+            border-radius: 10px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; 
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        figure {
+            flex: 0 1 calc(45% - 20px); 
+            min-width: 320px;
+            margin: 0;
+            border: 1px solid #c5a059; 
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        figure:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            padding: 20px;
+            background-color: #111;
+            border-bottom: 1px solid #333;
+        }
+
+        #featured { animation-delay: 0.2s; }
+        #sales { animation-delay: 0.4s; }
+        #regular { animation-delay: 0.6s; }
+        #contact { animation-delay: 0.8s; align-items: center; justify-content: center; }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            padding: 15px;
+            background-color: #222; 
+            color: #c5a059; 
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        figcaption strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #c5a059;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #800000;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="reset"] {
+            background-color: transparent;
+            color: #c5a059;
+            padding: 15px 40px;
+            border: 2px solid #c5a059;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        footer {
+            padding: 40px;
+            border-top: 1px solid #333;
+            color: #8e6e2e;
+        }
+
+        .back-to-top {
+            color: #800000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 10px; 
+            }
+
+            header h1 {
+                font-size: 1.5rem; 
+                letter-spacing: 2px;
+            }
+
+            .menu-toggle {
+                display: block; 
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background: linear-gradient(135deg, #c5a059 0%, #8e6e2e 100%);
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 10px 0;
+                z-index: 1000;
+                border-bottom: 3px solid #800000;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                padding: 15px;
+            }
+
+            section {
+                padding: 20px 10px; 
+            }
+
+            .gallery {
+                gap: 20px;
+            }
+
+            figure {
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+
+            form {
+                padding: 20px 15px;
+            }
+
+            input[type="submit"], input[type="reset"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="top"></div>
+        <h1>Ethan Gacud Mock Gallery</h1>
+        
+        <nav>
+            <div class="menu-toggle" id="mobile-menu">&#9776; Menu</div>
+            
+            <ul id="nav-list">
+                <li><a href="#featured">Featured Products</a></li>
+                <li><a href="#sales">Sales Gallery</a></li>
+                <li><a href="#regular">Regular Gallery</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="featured">
+            <h2>Featured Products</h2>
+            <div class="gallery">
+                <figure>
+                    <div class="image-wrapper"><img src="https://getwalls.io/media/large/2015/05/kawasaki-bike-large-975422167.jpg" alt="ZX-10R"></div>
+                    <figcaption><strong>Kawasaki Ninja ZX-10R</strong>A track-born superbike engineered to dominate.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://tse3.mm.bing.net/th/id/OIP.FSzUIA7hUcH4cAGu6IPjfQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Panigale V4"></div>
+                    <figcaption><strong>Ducati Panigale V4</strong>Where MotoGP DNA meets breathtaking design.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://4kwallpapers.com/images/wallpapers/bmw-s-1000-rr-3840x2160-9796.jpg" alt="S1000RR"></div>
+                    <figcaption><strong>BMW S1000RR</strong>Precision German engineering fused with race-ready power.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="sales">
+            <h2>Sales Gallery</h2>
+            <div class="gallery">
+                <figure>
+                    <div class="image-wrapper"><img src="https://a.1stdibscdn.com/bulgari-serpenti-diamond-snake-necklace-in-18k-white-gold-for-sale/j_20462/j_207235621698434544955/j_20723562_1698434545732_bg_processed.jpg" alt="Bulgari"></div>
+                    <figcaption><strong>Bulgari Serpenti Necklace</strong>Luxurious piece now part of our exclusive sale.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://i.ibb.co/zHPxSQ0d/bruh.jpg" alt="Sauvage"></div>
+                    <figcaption><strong>Dior Sauvage Eau de Parfum</strong>Powerful and fresh scent—now at a special sale price.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://www.chanel.com/puls-img/1750768790375-onepdpeditopushdm974x1298px032xjpg_2596x1948.jpg" alt="Bleu"></div>
+                    <figcaption><strong>Bleu de Chanel Eau de Parfum</strong>Refined citrus blend with an exclusive discount.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="regular">
+            <h2>Regular Gallery</h2>
+            <div class="gallery">
+                <figure>
+                    <div class="image-wrapper"><img src="https://tse3.mm.bing.net/th/id/OIP.uDW1rPeytm7z5d464W1RXgHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Sky-Dweller"></div>
+                    <figcaption><strong>Rolex Sky-Dweller</strong>Everose Gold with dual time zone and annual calendar.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://images.squarespace-cdn.com/content/v1/5b213f95506fbec9b54e014c/1c593743-1120-46a6-9b43-a2913e961929/DSC03026.jpeg?format=1500w" alt="Submariner"></div>
+                    <figcaption><strong>Rolex Submariner</strong>Legendary dive watch blending gold and steel elegance.</figcaption>
+                </figure>
+                <figure>
+                    <div class="image-wrapper"><img src="https://img.joomcdn.net/2069e634479495c5f245ef3d4c557c5815fff5c4_original.jpeg" alt="Daytona"></div>
+                    <figcaption><strong>Rolex Cosmograph Daytona</strong>Rare icon where green elegance meets chronograph mastery.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form action="#" method="post">
+
+                <label for="name">Full Name:</label><br>
+                <input type="text" id="name" placeholder="Enter your full name..." name="name" required><br><br>
+
+                <label for="email">Email Address:</label><br>
+                <input type="email" id="email" placeholder="Enter Valid email..." name="email" required><br><br>
+
+                <label for="phone">Phone Number:</label><br>
+                <input type="tel" id="phone" name="phone"><br><br>
+
+                <label for="subject">Subject:</label><br>
+                <input type="text" id="subject" name="subject"><br><br>
+
+                <label for="message">Your Message:</label><br>
+                <textarea id="message" placeholder="Your Message..." name="message" rows="5" cols="30"></textarea>
+
+                <br><br>
+
+                <input type="submit" value="Submit">
+                <input type="reset" value="Reset Form">
+
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Product Gallery. All rights reserved.</p>
+        <a href="#top" class="back-to-top">Back to Top</a>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const navLinks = document.querySelectorAll('#nav-list a');
+
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('show');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navList.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
